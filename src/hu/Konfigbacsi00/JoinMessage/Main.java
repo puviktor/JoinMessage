@@ -23,7 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	
 	/**
-	 * Private változók részlege.
+	 * Private vÃ¡ltozÃ³k rÃ©szlege.
 	 */
 	
 	private File config = new File(this.getDataFolder(), "config.yml");
@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
 	private static Main instance;
 	
 	/**
-	 * Public változók részlege.
+	 * Public vÃ¡ltozÃ³k rÃ©szlege.
 	 */
 	
 	public boolean connected = false;
@@ -55,25 +55,25 @@ public class Main extends JavaPlugin {
 	}
 	
 	/**
-	 * Adatbázis típus kiválasztása és inicializálása.
+	 * AdatbÃ¡zis tÃ­pus kivÃ¡lasztÃ¡sa Ã©s inicializÃ¡lÃ¡sa.
 	 * 
 	 * @param MySQLCredentials, DatabaseHandler
 	 */
 	
 	public void handleDatabase(){
 		type = DatabaseType.valueOf(getConfig().getString("adatbazis.tipus").toUpperCase());
-		getLogger().info("Adatbázis típusa: " + type);
+		getLogger().info("AdatbÃ¡zis tÃ­pusa: " + type);
 		
 		cred = new MySQLCredentials(getConfig().getString("adatbazis.hoszt"), getConfig().getInt("adatbazis.port"), getConfig().getString("adatbazis.felhasznalo"), getConfig().getString("adatbazis.jelszo"), getConfig().getString("adatbazis.adatbazis"), getConfig().getString("adatbazis.tabla"));
 		
 		if(type == DatabaseType.MYSQL){
-			if(!getConfig().getString("adatbazis.jelszo").equalsIgnoreCase("")){
-				getLogger().info("Csatlakozás az adatbázishoz...");
+			if(!getConfig().getString("adatbazis.jelszo").equalsIgnoreCase("")) {
+				getLogger().info("CsatlakozÃ¡s az adatbÃ¡zishoz...");
 				
-	        	sql = new MySQLConnector(cred);
-	        }else{
-	        	getLogger().severe("A plugin MySQL üzemmódban van és nincsenek beállítva az adatok!");
-	        	getLogger().severe("Kérlek, fejezd be az adatok beállítását, vagy válts SQLite üzemmódra!");
+	        		sql = new MySQLConnector(cred);
+	        	} else {
+	        		getLogger().severe("A plugin MySQL Ã¼zemmÃ³dban van Ã©s nincsenek beÃ¡llÃ­tva az adatok!");
+	        		getLogger().severe("KÃ©rlek, fejezd be az adatok beÃ¡llÃ­tÃ¡sÃ¡t, vagy vÃ¡lts SQLite Ã¼zemmÃ³dra!");
 	        	
 	        	return;
 	        }
@@ -84,7 +84,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	public void onEnable(){
-		getLogger().info("A plugin betöltése megkezdõdött...");
+		getLogger().info("A plugin betÃ¶ltÃ©se megkezdÃµdÃ¶tt...");
 		
 		setupConfig();
 		handleDatabase();
@@ -92,17 +92,17 @@ public class Main extends JavaPlugin {
 		
 		getCommand("joinmsg").setExecutor(new CoreCommand());
 		
-		getLogger().info("A plugin sikeresen betöltött!");
+		getLogger().info("A plugin sikeresen betÃ¶ltÃ¶tt!");
 	}
 	
 	public void onDisable(){
-		getLogger().info("A sikeresen kitöltött!");
+		getLogger().info("A sikeresen kitÃ¶ltÃ¶tt!");
 	}
 	
 	public void setupConfig(){
 		if(!config.exists()){
 			getDataFolder().mkdirs();
-			getLogger().info("Alap konfiguráció másolása...");
+			getLogger().info("Alap konfigurÃ¡ciÃ³ mÃ¡solÃ¡sa...");
 			
 			File to = config;
 			InputStream from = getResource("config.yml");
@@ -119,30 +119,30 @@ public class Main extends JavaPlugin {
 				out.close();
 				from.close();
 			} catch (Exception e) {
-				getLogger().severe("Nem sikerült az alap konfiguráció másolása: " + e.getMessage());
+				getLogger().severe("Nem sikerÃ¼lt az alap konfigurÃ¡ciÃ³ mÃ¡solÃ¡sa: " + e.getMessage());
 			}
 			
-			getLogger().info("Alap konfiguráció sikeresen átmásolva!");
+			getLogger().info("Alap konfigurÃ¡ciÃ³ sikeresen Ã¡tmÃ¡solva!");
 		}
 		
 		try {
 			getConfig().load(config);
 		} catch (FileNotFoundException e) {
-			getLogger().severe("Nem sikerült a konfiguráció betöltése: " + e.getMessage());
+			getLogger().severe("Nem sikerÃ¼lt a konfigurÃ¡ciÃ³ betÃ¶ltÃ©se: " + e.getMessage());
 		} catch (IOException e) {
-			getLogger().severe("Nem sikerült a konfiguráció betöltése: " + e.getMessage());
+			getLogger().severe("Nem sikerÃ¼lt a konfigurÃ¡ciÃ³ betÃ¶ltÃ©se: " + e.getMessage());
 		} catch (InvalidConfigurationException e) {
-			getLogger().severe("Nem sikerült a konfiguráció betöltése: " + e.getMessage());
+			getLogger().severe("Nem sikerÃ¼lt a konfigurÃ¡ciÃ³ betÃ¶ltÃ©se: " + e.getMessage());
 		}
 		
-		getLogger().info("Konfiguráció sikeresen betöltve!");
+		getLogger().info("KonfigurÃ¡ciÃ³ sikeresen betÃ¶ltve!");
 	}
 	
 	public void saveConfig(){
 		try {
 			getConfig().save(config);
 		} catch (IOException e) {
-			getLogger().severe("Nem sikerült a konfiguráció elmentése: " + e.getMessage());
+			getLogger().severe("Nem sikerÃ¼lt a konfigurÃ¡ciÃ³ elmentÃ©se: " + e.getMessage());
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class Main extends JavaPlugin {
 		try {
 			sql.getStatement().executeUpdate("CREATE TABLE IF NOT EXISTS `" + cred.getTable() + "` (`joinmsg` varchar(256), `username` varchar(16), PRIMARY KEY (username))");
 		} catch (SQLException e) {
-			getLogger().severe("Nem sikerült az adatbázis legenerálása: " + e.getMessage());
+			getLogger().severe("Nem sikerÃ¼lt az adatbÃ¡zis legenerÃ¡lÃ¡sa: " + e.getMessage());
 		}
 	}
 
