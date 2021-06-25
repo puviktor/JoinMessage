@@ -1,0 +1,37 @@
+#Az üzenetek és egyéb adatok tárolásának módja.
+adatbazis:
+  #Két típus közül választhatsz jelenleg.
+  #mysql -> értelem szerűen, ez egy MySQL kapcsolat.
+  #sql -> mely során SQL formátumban, a gépeden egy .db fájlban fogja tárolni az adatokat.
+  tipus: 'sqlite'
+  #!!Ezekre akkor van szükséged, az a tárolás MySQL üzemmódban fut!!
+  kiszolgalo: 'localhost'
+  port: 3306
+  felhasznalo: 'root'
+  jelszo: ''
+  adatbazis: 'joinmsg'
+  tabla: 'joinmsg'
+
+#A plugin által, a játékosok részére küldött üzenetek.
+uzenetek:
+  prefix: '&e[Üzenet]'
+  beallitva: '&fSikeresen beállítottad az egyedi üdvözlő üzeneted!'
+  torolve: '&fSikeresen törölted az egyedi üdvözlő üzeneted!'
+  nincs_jog: '&cNincs jogosultságod a parancs futtatásához!'
+  csak_jatekos: '&cEzt a parancsot csak játékos használhatja!'
+  konfig_ujratoltve: '&fA konfiguráció sikeresen újratöltve!'
+
+  #Csaltlakozási és lecsatlakozási üzenetek.
+  csatlakozas: '&6%jatekos% &fcsatlakozott a szerverre.'
+  lecsatlakozas: '&6%jatekos% &felhagyta a szervert.'
+
+  #Segítség a játékosok számára.
+  segitseg:
+    - "%prefix% &f/joinmsg set <üzenet> - Üdvözlő üzeneted beállítása."
+    - "%prefix% &f/joinmsg clear - Üdvözlő üzeneted törlése."
+  
+  #Segítség az adminok számára.
+  segitseg_admin:
+    - "%prefix% &f/joinmsg set <üzenet> - Üdvözlő üzeneted beállítása."
+    - "%prefix% &f/joinmsg clear - Üdvözlő üzeneted törlése."
+    - "%prefix% &f/joinmsg reload - A konfiguráció újratöltés."

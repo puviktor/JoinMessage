@@ -1,0 +1,15 @@
+name: UdvozloUzenet
+main: hu.Konfigbacsi00.JoinMessage.Main
+version: 2.0
+
+commands:
+  joinmsg:
+    description: Egyedi üdvözlő üzenet beállítása.
+
+permissions:
+  joinmsg.set:
+    description: A beállításhoz szükséges jogosultsásega.
+    default: op
+  joinmsg.admin:
+    description: Korlátlan hozzáférés a pluginhoz.
+    default: op
